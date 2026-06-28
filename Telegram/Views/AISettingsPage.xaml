@@ -1,0 +1,96 @@
+<Page
+    x:Class="Telegram.Views.AISettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Telegram.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer>
+        <StackPanel Padding="20" Spacing="16" MaxWidth="600">
+            <!-- Title -->
+            <TextBlock Text="AI Assistant Settings" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBlock Text="Configure your AI features powered by Ollama" 
+                       Style="{StaticResource BodyTextBlockStyle}" 
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+
+            <!-- AI Availability Status -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
+                    CornerRadius="8" 
+                    Padding="16"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="AI Status" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="AIStatusText" Text="Checking..." FontSize="14"/>
+                    <HyperlinkButton Content="Download Ollama" NavigateUri="https://ollama.ai"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Enable/Disable AI Features -->
+            <ToggleSwitch 
+                Header="Enable AI Features"
+                x:Name="EnableAIToggle"
+                OnContent="AI features are enabled"
+                OffContent="AI features are disabled"
+                Toggled="OnAIToggleChanged"/>
+
+            <!-- AI Provider Selection -->
+            <StackPanel Spacing="8">
+                <TextBlock Text="AI Provider" FontWeight="SemiBold"/>
+                <ComboBox x:Name="ProviderComboBox" PlaceholderText="Select Provider" SelectionChanged="OnProviderChanged">
+                    <ComboBoxItem>Ollama (Local)
+                    </ComboBoxItem>
+                    <ComboBoxItem>Ollama Remote</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Ollama Settings -->
+            <StackPanel Spacing="8" x:Name="OllamaSettingsPanel">
+                <TextBlock Text="Ollama Configuration" FontWeight="SemiBold"/>
+                <StackPanel Spacing="4">
+                    <TextBlock Text="Server Address" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBox x:Name="OllamaServerInput" PlaceholderText="http://localhost:11434" Margin="0,4,0,0"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Model Selection -->
+            <StackPanel Spacing="8">
+                <TextBlock Text="Model Selection" FontWeight="SemiBold"/>
+                <ComboBox x:Name="ModelComboBox" PlaceholderText="Select Model">
+                    <ComboBoxItem>mistral (Recommended)</ComboBoxItem>
+                    <ComboBoxItem>llama2</ComboBoxItem>
+                    <ComboBoxItem>neural-chat</ComboBoxItem>
+                    <ComboBoxItem>dolphin-mixtral</ComboBoxItem>
+                </ComboBox>
+                <TextBlock Text="Larger models are more capable but slower. Mistral offers the best balance." 
+                           FontSize="12" 
+                           Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
+            </StackPanel>
+
+            <!-- Feature Toggles -->
+            <StackPanel Spacing="12" Padding="12" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="8">
+                <TextBlock Text="Feature Preferences" FontWeight="SemiBold"/>
+                <ToggleSwitch Header="Enable Quick Actions" OffContent="Off" OnContent="On"/>
+                <ToggleSwitch Header="Enable Chat Suggestions" OffContent="Off" OnContent="On"/>
+                <ToggleSwitch Header="Enable Message Analysis" OffContent="Off" OnContent="On"/>
+            </StackPanel>
+
+            <!-- Information Section -->
+            <Border Background="{ThemeResource AccentButtonBackground}" 
+                    CornerRadius="8" 
+                    Padding="16"
+                    Opacity="0.9">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="About Ollama" FontWeight="SemiBold" Foreground="White"/>
+                    <TextBlock Text="Ollama allows you to run large language models locally on your computer. All processing happens offline, ensuring your privacy." 
+                               TextWrapping="Wrap" 
+                               Foreground="White"
+                               FontSize="12"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
